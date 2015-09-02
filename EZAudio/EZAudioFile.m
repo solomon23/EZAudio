@@ -247,18 +247,8 @@ typedef struct
     NSURL *fileURL = (__bridge NSURL *)(url);
     BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:fileURL.path];
     
-    //
-    // Create an ExtAudioFileRef for the file handle
-    //
-    if (fileExists)
-    {
-        [EZAudioUtilities checkResult:ExtAudioFileOpenURL(url, &self.info->extAudioFileRef)
-                            operation:"Failed to create ExtAudioFileRef"];
-    }
-    else
-    {
-        return NO;
-    }
+    [EZAudioUtilities checkResult:ExtAudioFileOpenURL(url, &self.info->extAudioFileRef)
+        operation:"Failed to create ExtAudioFileRef"];
     
     //
     // Get the underlying AudioFileID
